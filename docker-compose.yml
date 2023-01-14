@@ -1,0 +1,19 @@
+version: "3.7"
+
+services:
+    goapp:
+        build:
+            context: /goapp
+            dockerfile: Dockerfile
+        ports:
+            - "8080:8080"
+        restart: unless-stopped
+    nodeapp:
+        build:
+            context: /nodeapp
+            dockerfile: Dockerfile
+        environment:
+            - GO_SERVICE=goapp
+        ports:
+            - 5000:5000
+        restart: unless-stopped
